@@ -1,0 +1,22 @@
+public class DiceProbabilities {
+
+    public static void main(String[] args) {
+        double[] probabilities = calculateProbabilities();
+        for (int sumValue = 2; sumValue <= 12; sumValue++) {
+            System.out.printf("P(Sum = %d) = %.0f/36%n", sumValue, probabilities[sumValue] * 36); 
+        }
+    }
+
+    public static double[] calculateProbabilities() {
+        int diceSides = 6;
+        int numCombinations = diceSides * diceSides;
+        double[] probabilities = new double[2 * diceSides + 1];
+
+        for (int dieA = 1; dieA <= diceSides; dieA++) {
+            for (int dieB = 1; dieB <= diceSides; dieB++) {
+                probabilities[dieA + dieB] += 1.0 / numCombinations;
+            }
+        }
+        return probabilities;
+    }
+}
