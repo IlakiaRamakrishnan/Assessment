@@ -1,0 +1,25 @@
+import java.util.*;
+
+public class DiceCombinationsDisplay {
+    public static void main(String[] args) {
+        int[][] combinations = generateCombinations();
+
+        for (int i = 0; i < combinations.length; i++) {
+            int[] combo = combinations[i];
+            System.out.println(Arrays.toString(combo));
+        }
+    }
+
+    public static int[][] generateCombinations() {
+        int[][] combinations = new int[36][2];
+        int index = 0;
+        for (int die1 = 1; die1 <= 6; die1++) {
+            for (int die2 = 1; die2 <= 6; die2++) {
+                combinations[index][0] = die1;
+                combinations[index][1] = die2;
+                index++;
+            }
+        }
+        return combinations;
+    }
+}
