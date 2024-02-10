@@ -1,0 +1,48 @@
+public class DoomedDice {
+
+    public static void main(String[] args) {
+
+        int[] originalDiceA = {1, 2, 3, 4, 5, 6}, originalDiceB = {1, 2, 3, 4, 5, 6};
+        double[] originalProbabilities = calculateProbabilities(originalDiceA, originalDiceB);
+
+        int[] newDiceA = undoom_dice(originalDiceA);
+        int[] newDiceB = originalDiceB;
+        double[] newProbabilities = calculateProbabilities(newDiceA, newDiceB);
+        
+        System.out.print("Original Dice Probabilities\n");
+        for (int sumValue = 2; sumValue <= 12; sumValue++) {
+            System.out.printf("P(Sum = %d) = %.0f/36%n", sumValue, originalProbabilities[sumValue]*36);
+        }
+
+        System.out.print("\nNew Dice Probabilities\n");
+        for (int sumValue = 2; sumValue <= 12; sumValue++) {
+            System.out.printf("P(Sum = %d) = %.0f/36%n", sumValue, newProbabilities[sumValue]*36);
+        }
+    }
+
+    public static double[] calculateProbabilities(int[] diceA, int[] diceB) {
+        double[] probabilities = new double[13];
+
+        for (int face1: diceA) {
+            for (int face2: diceB) {
+                probabilities[face1 + face2] += 1.0 / 36;
+            }
+        }
+        return probabilities;
+    }
+
+    public static int[] undoom_dice(int[] Dice_A) {
+        int[] New_Dice_A = new int[6];
+
+        // Reattach spots to Dice A
+        for (int i = 0; i < 6; i++) {
+            if (Dice_A[i] <= 4) {
+                New_Dice_A[i] = Dice_A[i];
+            } else {
+                New_Dice_A[i] = 4;
+            }
+        }
+
+        return New_Dice_A;
+    }
+}
